@@ -2,7 +2,7 @@
 //
 //  Package.swift
 //
-//  Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)
+//  Copyright (c) 2014-2020 Alamofire Software Foundation (http://alamofire.org/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,12 @@ let package = Package(name: "Alamofire",
                       products: [.library(name: "Alamofire",
                                           targets: ["Alamofire"])],
                       targets: [.target(name: "Alamofire",
-                                        path: "Source"),
+                                        path: "Source",
+                                        linkerSettings: [.linkedFramework("CFNetwork",
+                                                                          .when(platforms: [.iOS,
+                                                                                            .macOS,
+                                                                                            .tvOS,
+                                                                                            .watchOS]))]),
                                 .testTarget(name: "AlamofireTests",
                                             dependencies: ["Alamofire"],
                                             path: "Tests")],
